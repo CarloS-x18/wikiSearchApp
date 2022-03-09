@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="mt-5 card text-center col-md-9 col-12">
+      <div class="card-header">
+        <h1 class="fs-md-3 fw-bold">WikiSearchApp</h1>
+      </div>
+      <div class="card-body p-5">
+        <p class="card-text mb-4">Escribe lo que estas buscando, te dare una respuesta.</p>
+        <form class="input-group"
+              (ngSubmit)="searchArticles()"
+              autocomplete="off">
+          <input class="form-control"
+                 type="text"
+                 name="term"
+                 [(ngModel)]="term">
+          <button class="btn btn-primary"
+                  type="submit">
+            Buscar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger text-center col-md-9 col-12"
+       *ngIf="showAlert">
+    No has escrito nada para poder darte una respuesta.
+  </div>
+
+  <div class="alert alert-secondary text-center col-md-9 col-12"
+       *ngIf="showAlertError">
+    No encontre nada con el termino "{{ term }}", intenta con algo más.
+  </div>
+
+  <div *ngIf="articles.length > 0" class="cards mt-5">
+    <div class="cards-container">
+      <div class="card-article" *ngFor="let article of articles">
+        <app-card-article [article]="article"></app-card-article>
+      </div>
+    </div>
+  </div>
+</div>
+
